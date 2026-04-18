@@ -12,7 +12,7 @@ public class CadastrarRecebimentoCaseImpl implements CadastrarRecebimentoCase{
     }
 
     public Receiving execute(Receiving receiving) {
-        return null;
+        return receivingGateway.cadastrarRecebimento(receiving);
     }
 
 }

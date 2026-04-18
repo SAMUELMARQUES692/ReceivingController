@@ -1,16 +1,16 @@
 package dev.samuel.ReceivingController.infra.presentation;
 
 import dev.samuel.ReceivingController.core.entities.Receiving;
+import dev.samuel.ReceivingController.core.usecases.BuscarRecebimentoCase;
 import dev.samuel.ReceivingController.core.usecases.CadastrarRecebimentoCase;
 import dev.samuel.ReceivingController.infra.dto.ReceivingDTO;
 import dev.samuel.ReceivingController.infra.mapper.ReceivingMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ReceivingController {
 
     private final CadastrarRecebimentoCase cadastrarRecebimentoCase;
+    private final BuscarRecebimentoCase buscarRecebimentoCase;
     private final ReceivingMapper receivingMapper;
 
     @PostMapping
@@ -26,10 +27,12 @@ public class ReceivingController {
         return ResponseEntity.status(HttpStatus.CREATED).body(receivingMapper.toDto(novoRecebimento));
     }
 
-    /*@GetMapping("/{id}")
-    public ResponseEntity<List<ReceivingDTO>> buscarRecebimento(@PathVariable Long id){
-
-    }*/
+    @GetMapping()
+    public ResponseEntity<List<ReceivingDTO>> buscarRecebimento(){
+       List<Receiving> recebimentos = buscarRecebimentoCase.execute();
+       List<ReceivingDTO> dtos = receivingMapper.toDtoList(recebimentos);
+       return ResponseEntity.ok(dtos);
+    }
 
 
 

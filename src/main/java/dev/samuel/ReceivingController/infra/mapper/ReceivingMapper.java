@@ -2,8 +2,9 @@ package dev.samuel.ReceivingController.infra.mapper;
 
 import dev.samuel.ReceivingController.core.entities.Receiving;
 import dev.samuel.ReceivingController.infra.dto.ReceivingDTO;
-import dev.samuel.ReceivingController.infra.persistence.ReceivingModel;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class ReceivingMapper {
@@ -24,7 +25,6 @@ public class ReceivingMapper {
 
 
     public ReceivingDTO toDto(Receiving receiving) {
-
         return new ReceivingDTO(
                 receiving.id(),
                 receiving.nomeEmpresa(),
@@ -36,6 +36,12 @@ public class ReceivingMapper {
                 receiving.horarioDeFinalizacao(),
                 receiving.observacoes()
         );
+    }
+
+    public List<ReceivingDTO> toDtoList(List<Receiving> receivings) {
+        return receivings.stream()
+                .map(this::toDto)
+                .toList();
     }
 
 }

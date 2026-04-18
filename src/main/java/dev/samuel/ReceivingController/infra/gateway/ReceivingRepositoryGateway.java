@@ -8,6 +8,8 @@ import dev.samuel.ReceivingController.infra.persistence.ReceivingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Component
 public class ReceivingRepositoryGateway implements ReceivingGateway {
@@ -19,5 +21,12 @@ public class ReceivingRepositoryGateway implements ReceivingGateway {
     public Receiving cadastrarRecebimento(Receiving receiving) {
         ReceivingModel salvar = repository.save(mapper.toModel(receiving));
         return mapper.toDomain(salvar);
+    }
+
+    @Override
+    public List<Receiving> buscarRecebimetnos() {
+        return repository.findAll().stream()
+                .map(mapper::toDomain)
+                .toList();
     }
 }
