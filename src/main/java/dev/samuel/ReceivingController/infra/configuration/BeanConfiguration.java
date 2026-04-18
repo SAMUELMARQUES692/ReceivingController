@@ -1,10 +1,7 @@
 package dev.samuel.ReceivingController.infra.configuration;
 
 import dev.samuel.ReceivingController.core.gateway.ReceivingGateway;
-import dev.samuel.ReceivingController.core.usecases.BuscarRecebimentoCase;
-import dev.samuel.ReceivingController.core.usecases.BuscarRecebimentoCaseImpl;
-import dev.samuel.ReceivingController.core.usecases.CadastrarRecebimentoCase;
-import dev.samuel.ReceivingController.core.usecases.CadastrarRecebimentoCaseImpl;
+import dev.samuel.ReceivingController.core.usecases.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,6 +16,11 @@ public class BeanConfiguration {
     @Bean
     public BuscarRecebimentoCase findReceivingUseCase(ReceivingGateway receivingGateway) {
         return new BuscarRecebimentoCaseImpl(receivingGateway);
+    }
+
+    @Bean
+    public BuscarRecebimentoPorIdCase findReceivingIdUseCase(ReceivingGateway receivingGateway) {
+        return new BuscarRecebimentoPorIdImpl(receivingGateway);
     }
 
 }

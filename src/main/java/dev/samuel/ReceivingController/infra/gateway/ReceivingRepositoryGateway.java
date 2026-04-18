@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Component
@@ -29,4 +30,12 @@ public class ReceivingRepositoryGateway implements ReceivingGateway {
                 .map(mapper::toDomain)
                 .toList();
     }
+
+    @Override
+    public Receiving buscarPorRecebimentoPorId(Long id) {
+       Optional<ReceivingModel> recebimentoPorId = repository.findById(id);
+       return recebimentoPorId.map(mapper::toDomain).orElse(null);
+    }
+
+
 }
