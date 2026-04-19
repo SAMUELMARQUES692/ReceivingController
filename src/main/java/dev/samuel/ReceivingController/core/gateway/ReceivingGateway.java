@@ -13,4 +13,6 @@ public interface ReceivingGateway {
 
     Receiving buscarPorRecebimentoPorId(Long id);
 
+    Receiving atualizarRecebimento(Long id, Receiving receiving);
+
 }

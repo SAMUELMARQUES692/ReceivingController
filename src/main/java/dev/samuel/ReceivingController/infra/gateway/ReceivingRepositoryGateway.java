@@ -5,6 +5,7 @@ import dev.samuel.ReceivingController.core.gateway.ReceivingGateway;
 import dev.samuel.ReceivingController.infra.mapper.ReceivingModelMapper;
 import dev.samuel.ReceivingController.infra.persistence.ReceivingModel;
 import dev.samuel.ReceivingController.infra.persistence.ReceivingRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -35,6 +36,17 @@ public class ReceivingRepositoryGateway implements ReceivingGateway {
     public Receiving buscarPorRecebimentoPorId(Long id) {
        Optional<ReceivingModel> recebimentoPorId = repository.findById(id);
        return recebimentoPorId.map(mapper::toDomain).orElse(null);
+    }
+
+    @Override
+    public Receiving atualizarRecebimento(Long id, Receiving receiving) {
+        ReceivingModel recebimentoExistente = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Recebimento com ID " + id + " não encontrado"));
+
+        ReceivingModel recebimentoAtualizado = mapper.toModel(receiving);
+        recebimentoAtualizado.setId(id);
+
+        return mapper.toDomain(repository.save(recebimentoAtualizado));
     }
 
 

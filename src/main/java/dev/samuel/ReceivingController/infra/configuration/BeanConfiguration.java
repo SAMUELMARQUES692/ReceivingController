@@ -23,4 +23,9 @@ public class BeanConfiguration {
         return new BuscarRecebimentoPorIdImpl(receivingGateway);
     }
 
+    @Bean
+    public AtualizarRecebimentoCase updateReceivingIdUseCase(ReceivingGateway receivingGateway) {
+        return new AtualizarRecebimentoCaseImpl(receivingGateway);
+    }
+
 }

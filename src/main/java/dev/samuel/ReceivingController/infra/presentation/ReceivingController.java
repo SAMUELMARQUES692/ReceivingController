@@ -1,11 +1,13 @@
 package dev.samuel.ReceivingController.infra.presentation;
 
 import dev.samuel.ReceivingController.core.entities.Receiving;
+import dev.samuel.ReceivingController.core.usecases.AtualizarRecebimentoCase;
 import dev.samuel.ReceivingController.core.usecases.BuscarRecebimentoCase;
 import dev.samuel.ReceivingController.core.usecases.BuscarRecebimentoPorIdCase;
 import dev.samuel.ReceivingController.core.usecases.CadastrarRecebimentoCase;
 import dev.samuel.ReceivingController.infra.dto.ReceivingDTO;
 import dev.samuel.ReceivingController.infra.mapper.ReceivingMapper;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,7 @@ public class ReceivingController {
     private final CadastrarRecebimentoCase cadastrarRecebimentoCase;
     private final BuscarRecebimentoCase buscarRecebimentoCase;
     private final BuscarRecebimentoPorIdCase buscarRecebimentoPorIdCase;
+    private final AtualizarRecebimentoCase atualizarRecebimentoCase;
     private final ReceivingMapper receivingMapper;
 
     @PostMapping
@@ -46,6 +49,13 @@ public class ReceivingController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Recebimento com ID " + id + " não existe em nossos registros");
         }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ReceivingDTO> atualizarRecebimento(@PathVariable Long id, @RequestBody @Valid ReceivingDTO receivingDTO) {
+       Receiving converter = receivingMapper.toDomain(receivingDTO);
+       Receiving atualizarRecebimento = atualizarRecebimentoCase.execute(id, converter);
+       return ResponseEntity.ok(receivingMapper.toDto(atualizarRecebimento));
     }
 
 
