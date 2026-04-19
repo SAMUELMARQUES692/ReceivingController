@@ -1,10 +1,7 @@
 package dev.samuel.ReceivingController.infra.presentation;
 
 import dev.samuel.ReceivingController.core.entities.Receiving;
-import dev.samuel.ReceivingController.core.usecases.AtualizarRecebimentoCase;
-import dev.samuel.ReceivingController.core.usecases.BuscarRecebimentoCase;
-import dev.samuel.ReceivingController.core.usecases.BuscarRecebimentoPorIdCase;
-import dev.samuel.ReceivingController.core.usecases.CadastrarRecebimentoCase;
+import dev.samuel.ReceivingController.core.usecases.*;
 import dev.samuel.ReceivingController.infra.dto.ReceivingDTO;
 import dev.samuel.ReceivingController.infra.mapper.ReceivingMapper;
 import jakarta.validation.Valid;
@@ -24,6 +21,7 @@ public class ReceivingController {
     private final BuscarRecebimentoCase buscarRecebimentoCase;
     private final BuscarRecebimentoPorIdCase buscarRecebimentoPorIdCase;
     private final AtualizarRecebimentoCase atualizarRecebimentoCase;
+    private final DeletarRecebimentoCase deletarRecebimentoCase;
     private final ReceivingMapper receivingMapper;
 
     @PostMapping
@@ -58,6 +56,11 @@ public class ReceivingController {
        return ResponseEntity.ok(receivingMapper.toDto(atualizarRecebimento));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarRecebimento(@PathVariable Long id) {
+        deletarRecebimentoCase.execute(id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }

@@ -28,4 +28,9 @@ public class BeanConfiguration {
         return new AtualizarRecebimentoCaseImpl(receivingGateway);
     }
 
+    @Bean
+    public DeletarRecebimentoCase deleteReceivingIdUseCase(ReceivingGateway receivingGateway) {
+        return new DeletarRecebimentoCaseImpl(receivingGateway);
+    }
+
 }

@@ -15,4 +15,6 @@ public interface ReceivingGateway {
 
     Receiving atualizarRecebimento(Long id, Receiving receiving);
 
+    void deletarRecebimento(Long id);
+
 }

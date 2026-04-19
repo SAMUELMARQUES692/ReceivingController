@@ -49,5 +49,13 @@ public class ReceivingRepositoryGateway implements ReceivingGateway {
         return mapper.toDomain(repository.save(recebimentoAtualizado));
     }
 
+    @Override
+    public void deletarRecebimento(Long id) {
+        ReceivingModel recebimentoExistente = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Recebimento com ID " + id + " não encontrado"));
+
+        repository.deleteById(id);
+    }
+
 
 }
