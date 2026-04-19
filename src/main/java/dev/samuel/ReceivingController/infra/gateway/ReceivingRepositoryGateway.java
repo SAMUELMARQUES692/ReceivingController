@@ -26,7 +26,7 @@ public class ReceivingRepositoryGateway implements ReceivingGateway {
     }
 
     @Override
-    public List<Receiving> buscarRecebimetnos() {
+    public List<Receiving> buscarRecebimentos() {
         return repository.findAll().stream()
                 .map(mapper::toDomain)
                 .toList();
@@ -40,7 +40,7 @@ public class ReceivingRepositoryGateway implements ReceivingGateway {
 
     @Override
     public Receiving atualizarRecebimento(Long id, Receiving receiving) {
-        ReceivingModel recebimentoExistente = repository.findById(id)
+                repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Recebimento com ID " + id + " não encontrado"));
 
         ReceivingModel recebimentoAtualizado = mapper.toModel(receiving);
@@ -51,7 +51,7 @@ public class ReceivingRepositoryGateway implements ReceivingGateway {
 
     @Override
     public void deletarRecebimento(Long id) {
-        ReceivingModel recebimentoExistente = repository.findById(id)
+                repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Recebimento com ID " + id + " não encontrado"));
 
         repository.deleteById(id);

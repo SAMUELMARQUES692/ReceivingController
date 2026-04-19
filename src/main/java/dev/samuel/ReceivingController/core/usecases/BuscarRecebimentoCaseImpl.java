@@ -14,7 +14,7 @@ public class BuscarRecebimentoCaseImpl implements BuscarRecebimentoCase{
     }
 
     public List<Receiving> execute() {
-        return receivingGateway.buscarRecebimetnos();
+        return receivingGateway.buscarRecebimentos();
     }
 
 }

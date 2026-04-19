@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface BuscarRecebimentoCase {
 
-     List <Receiving> execute();
+     List<Receiving> execute();
 
 }

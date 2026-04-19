@@ -4,6 +4,6 @@ import dev.samuel.ReceivingController.core.entities.Receiving;
 
 public interface CadastrarRecebimentoCase {
 
-    public Receiving execute(Receiving receiving);
+     Receiving execute(Receiving receiving);
 
 }

@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -25,9 +27,12 @@ public class ReceivingController {
     private final ReceivingMapper receivingMapper;
 
     @PostMapping
-    public ResponseEntity<ReceivingDTO> cadastrarRecebimento(@RequestBody ReceivingDTO receivingDTO) {
+    public ResponseEntity<Map<String, Object>> cadastrarRecebimento(@RequestBody ReceivingDTO receivingDTO) {
         Receiving novoRecebimento = cadastrarRecebimentoCase.execute(receivingMapper.toDomain(receivingDTO));
-        return ResponseEntity.status(HttpStatus.CREATED).body(receivingMapper.toDto(novoRecebimento));
+        Map<String, Object> response = new HashMap<>();
+        response.put("Mensagem: ", "Evento cadastrado com sucesso no nosso banco de dados");
+        response.put("Dados do Evento: ", receivingMapper.toDto(novoRecebimento));
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping
