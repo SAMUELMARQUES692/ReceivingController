@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Component
@@ -22,7 +23,23 @@ public class ReceivingRepositoryGateway implements ReceivingGateway {
 
     @Override
     public Receiving cadastrarRecebimento(Receiving receiving) {
-        ReceivingModel salvar = repository.save(mapper.toModel(receiving));
+
+        String ticket = UUID.randomUUID().toString().substring(0, 6).toUpperCase();
+
+        Receiving receivingComTicket = new Receiving(
+                null,
+                receiving.nomeEmpresa(),
+                receiving.nomeTransportadora(),
+                receiving.tipoCarro(),
+                ticket,
+                receiving.notasFiscais(),
+                receiving.horarioMarcado(),
+                receiving.horarioInicial(),
+                receiving.horarioDeFinalizacao(),
+                receiving.observacoes()
+        );
+
+        ReceivingModel salvar = repository.save(mapper.toModel(receivingComTicket));
         return mapper.toDomain(salvar);
     }
 
