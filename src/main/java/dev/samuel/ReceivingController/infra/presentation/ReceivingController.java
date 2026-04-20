@@ -43,15 +43,8 @@ public class ReceivingController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
-        Receiving buscarRecebimentoId = buscarRecebimentoPorIdCase.execute(id);
-
-        if (buscarRecebimentoId != null) {
-            ReceivingDTO buscaConvertida = receivingMapper.toDto(buscarRecebimentoId);
-            return ResponseEntity.ok(buscaConvertida);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Recebimento com ID " + id + " não existe em nossos registros");
-        }
+    public ResponseEntity<ReceivingDTO> buscarPorId(@PathVariable @Valid Long id) {
+        return ResponseEntity.ok(receivingMapper.toDto(buscarRecebimentoPorIdCase.execute(id)));
     }
 
     @PutMapping("/{id}")

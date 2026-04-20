@@ -1,0 +1,6 @@
+package dev.samuel.ReceivingController.infra.records;
+
+import java.time.LocalDateTime;
+
+public record ErrorResponse(String code, String message, LocalDateTime timestamp) {
+}

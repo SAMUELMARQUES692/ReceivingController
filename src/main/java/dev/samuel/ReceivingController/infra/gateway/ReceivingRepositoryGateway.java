@@ -2,6 +2,7 @@ package dev.samuel.ReceivingController.infra.gateway;
 
 import dev.samuel.ReceivingController.core.entities.Receiving;
 import dev.samuel.ReceivingController.core.gateway.ReceivingGateway;
+import dev.samuel.ReceivingController.infra.exception.handle.RecebimentoNotFoundException;
 import dev.samuel.ReceivingController.infra.mapper.ReceivingModelMapper;
 import dev.samuel.ReceivingController.infra.persistence.ReceivingModel;
 import dev.samuel.ReceivingController.infra.persistence.ReceivingRepository;
@@ -34,9 +35,11 @@ public class ReceivingRepositoryGateway implements ReceivingGateway {
 
     @Override
     public Receiving buscarPorRecebimentoPorId(Long id) {
-       Optional<ReceivingModel> recebimentoPorId = repository.findById(id);
-       return recebimentoPorId.map(mapper::toDomain).orElse(null);
+        return repository.findById(id)
+                .map(mapper::toDomain)
+                .orElseThrow(() -> new RecebimentoNotFoundException(id));
     }
+
 
     @Override
     public Receiving atualizarRecebimento(Long id, Receiving receiving) {
