@@ -1,5 +1,7 @@
-package dev.samuel.ReceivingController.infra.exception.handle;
+package dev.samuel.ReceivingController.infra.handler;
 
+import dev.samuel.ReceivingController.infra.exception.handle.DuplicateReceivingException;
+import dev.samuel.ReceivingController.infra.exception.handle.RecebimentoNotFoundException;
 import dev.samuel.ReceivingController.infra.records.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,16 @@ public class GlobalExceptionHandler {
                 LocalDateTime.now()
         );
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(DuplicateReceivingException.class)
+    public ResponseEntity<ErrorResponse> handleDuplicatedTicket(DuplicateReceivingException exception) {
+        ErrorResponse error = new ErrorResponse(
+                "TICKET_DUPLICATED",
+                exception.getMessage(),
+                LocalDateTime.now()
+        );
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
 

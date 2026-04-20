@@ -16,4 +16,6 @@ public interface ReceivingGateway {
 
     void deletarRecebimento(Long id);
 
+    boolean existePorTicket(String ticket);
+
 }

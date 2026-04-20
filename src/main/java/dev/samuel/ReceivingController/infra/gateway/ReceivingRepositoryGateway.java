@@ -60,5 +60,9 @@ public class ReceivingRepositoryGateway implements ReceivingGateway {
         repository.deleteById(id);
     }
 
-
+    @Override
+    public boolean existePorTicket(String ticket) {
+        return repository.findAll().stream()
+                .anyMatch(receiving -> receiving.getTicket().equalsIgnoreCase(ticket));
+    }
 }
