@@ -29,12 +29,12 @@ public class ReceivingMapper {
         return new ReceivingDTO(
                 receiving.id(),
                 receiving.nomeEmpresa(),
-                receiving.nomeEmpresa(),
+                receiving.nomeTransportadora(),
                 receiving.tipoCarro(),
                 receiving.ticket(),
                 receiving.notasFiscais(),
                 receiving.horarioMarcado(),
-                receiving.horarioInical(),
+                receiving.horarioInicial(),
                 receiving.horarioDeFinalizacao(),
                 receiving.observacoes()
         );

@@ -33,4 +33,9 @@ public class BeanConfiguration {
         return new DeletarRecebimentoCaseImpl(receivingGateway);
     }
 
+    @Bean
+    public FiltroTicketCase filterReceivingIdUseCase(ReceivingGateway receivingGateway) {
+        return new FiltroTicketCaseImpl(receivingGateway);
+    }
+
 }

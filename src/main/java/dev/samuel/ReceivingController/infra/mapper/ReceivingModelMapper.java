@@ -11,12 +11,12 @@ public class ReceivingModelMapper {
         return new ReceivingModel(
                 receiving.id(),
                 receiving.nomeEmpresa(),
-                receiving.nomeTrasnportadora(),
+                receiving.nomeTransportadora(),
                 receiving.tipoCarro(),
                 receiving.ticket(),
                 receiving.notasFiscais(),
                 receiving.horarioMarcado(),
-                receiving.horarioInical(),
+                receiving.horarioInicial(),
                 receiving.horarioDeFinalizacao(),
                 receiving.observacoes()
         );

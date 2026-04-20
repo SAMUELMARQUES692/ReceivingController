@@ -1,7 +1,8 @@
 package dev.samuel.ReceivingController.infra.handler;
 
-import dev.samuel.ReceivingController.infra.exception.handle.DuplicateReceivingException;
-import dev.samuel.ReceivingController.infra.exception.handle.RecebimentoNotFoundException;
+import dev.samuel.ReceivingController.infra.exception.DuplicateReceivingException;
+import dev.samuel.ReceivingController.infra.exception.ReceivingNotFoundException;
+import dev.samuel.ReceivingController.infra.exception.TicketNotFoundException;
 import dev.samuel.ReceivingController.infra.records.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,8 @@ import java.util.Map;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(RecebimentoNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleNotFound(RecebimentoNotFoundException exception) {
+    @ExceptionHandler(ReceivingNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleNotFound(ReceivingNotFoundException exception) {
         ErrorResponse error = new ErrorResponse(
                 "RECEIVING_NOT_FOUND",
                 exception.getMessage(),
@@ -35,6 +36,16 @@ public class GlobalExceptionHandler {
                 LocalDateTime.now()
         );
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
+    @ExceptionHandler(TicketNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleNotFoundTicket(TicketNotFoundException exception) {
+        ErrorResponse error = new ErrorResponse(
+                "TICKET_NOT_FOUND",
+                exception.getMessage(),
+                LocalDateTime.now()
+        );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
 

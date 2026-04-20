@@ -7,12 +7,12 @@ import java.time.LocalDateTime;
 public record Receiving(
         Long id,
         String nomeEmpresa,
-        String nomeTrasnportadora,
+        String nomeTransportadora,
         TipoCarro tipoCarro,
         String ticket,
         String notasFiscais,
         LocalDateTime horarioMarcado,
-        LocalDateTime horarioInical,
+        LocalDateTime horarioInicial,
         LocalDateTime horarioDeFinalizacao,
         String observacoes) {
 }

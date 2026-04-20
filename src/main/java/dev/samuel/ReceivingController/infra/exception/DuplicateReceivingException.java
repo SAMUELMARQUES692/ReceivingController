@@ -1,4 +1,4 @@
-package dev.samuel.ReceivingController.infra.exception.handle;
+package dev.samuel.ReceivingController.infra.exception;
 
 public class DuplicateReceivingException extends RuntimeException{
 

@@ -2,7 +2,7 @@ package dev.samuel.ReceivingController.infra.gateway;
 
 import dev.samuel.ReceivingController.core.entities.Receiving;
 import dev.samuel.ReceivingController.core.gateway.ReceivingGateway;
-import dev.samuel.ReceivingController.infra.exception.handle.RecebimentoNotFoundException;
+import dev.samuel.ReceivingController.infra.exception.ReceivingNotFoundException;
 import dev.samuel.ReceivingController.infra.mapper.ReceivingModelMapper;
 import dev.samuel.ReceivingController.infra.persistence.ReceivingModel;
 import dev.samuel.ReceivingController.infra.persistence.ReceivingRepository;
@@ -37,7 +37,7 @@ public class ReceivingRepositoryGateway implements ReceivingGateway {
     public Receiving buscarPorRecebimentoPorId(Long id) {
         return repository.findById(id)
                 .map(mapper::toDomain)
-                .orElseThrow(() -> new RecebimentoNotFoundException(id));
+                .orElseThrow(() -> new ReceivingNotFoundException(id));
     }
 
 
@@ -64,5 +64,10 @@ public class ReceivingRepositoryGateway implements ReceivingGateway {
     public boolean existePorTicket(String ticket) {
         return repository.findAll().stream()
                 .anyMatch(receiving -> receiving.getTicket().equalsIgnoreCase(ticket));
+    }
+
+    @Override
+    public Optional<Receiving> filtrarPorTicket(String ticket) {
+       return repository.findByTicket(ticket);
     }
 }

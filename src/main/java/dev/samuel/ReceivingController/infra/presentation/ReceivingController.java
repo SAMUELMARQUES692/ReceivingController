@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -25,6 +26,7 @@ public class ReceivingController {
     private final AtualizarRecebimentoCase atualizarRecebimentoCase;
     private final DeletarRecebimentoCase deletarRecebimentoCase;
     private final ReceivingMapper receivingMapper;
+    private final FiltroTicketCase filtroTicketCase;
 
     @PostMapping
     public ResponseEntity<Map<String, Object>> cadastrarRecebimento(@RequestBody ReceivingDTO receivingDTO) {
@@ -60,6 +62,10 @@ public class ReceivingController {
         return ResponseEntity.noContent().build();
     }
 
-
+    @GetMapping("/ticket/{ticket}")
+    public ResponseEntity<ReceivingDTO> filtrarPorTicket(@PathVariable String ticket) {
+        Receiving receiving = filtroTicketCase.execute(ticket);
+        return ResponseEntity.ok(receivingMapper.toDto(receiving));
+    }
 }
 
