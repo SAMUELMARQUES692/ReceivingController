@@ -10,6 +10,7 @@ public record ReceivingDTO(
         String nomeEmpresa,
         String nomeTransportadora,
         TipoCarro tipoCarro,
+        String ticket,
         String notasFiscais,
         LocalDateTime horarioMarcado,
         LocalDateTime horarioInicial,

@@ -30,6 +30,9 @@ public class ReceivingModel {
     @Column(length = 50, nullable = false)
     private TipoCarro tipoCarro;
 
+    @Column(length = 50, nullable = false, unique = true)
+    private String ticket;
+
     @Column(length = 200)
     private String notasFiscais;
 

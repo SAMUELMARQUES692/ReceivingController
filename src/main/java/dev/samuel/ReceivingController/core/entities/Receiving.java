@@ -9,6 +9,7 @@ public record Receiving(
         String nomeEmpresa,
         String nomeTrasnportadora,
         TipoCarro tipoCarro,
+        String ticket,
         String notasFiscais,
         LocalDateTime horarioMarcado,
         LocalDateTime horarioInical,
