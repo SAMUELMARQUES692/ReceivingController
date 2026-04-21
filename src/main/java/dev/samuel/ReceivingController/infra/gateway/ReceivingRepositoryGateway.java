@@ -61,7 +61,7 @@ public class ReceivingRepositoryGateway implements ReceivingGateway {
     @Override
     public Receiving atualizarRecebimento(Long id, Receiving receiving) {
                 repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Recebimento com ID " + id + " não encontrado"));
+                .orElseThrow(() -> new ReceivingNotFoundException(id));
 
         ReceivingModel recebimentoAtualizado = mapper.toModel(receiving);
         recebimentoAtualizado.setId(id);
@@ -72,7 +72,7 @@ public class ReceivingRepositoryGateway implements ReceivingGateway {
     @Override
     public void deletarRecebimento(Long id) {
                 repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Recebimento com ID " + id + " não encontrado"));
+                .orElseThrow(() -> new ReceivingNotFoundException(id));
 
         repository.deleteById(id);
     }
